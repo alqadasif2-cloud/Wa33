@@ -46,7 +46,11 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Center: Current Account Badge & Direct Logout Button */}
         {currentUser ? (
           <div className="flex items-center gap-1.5 sm:gap-2">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 shadow-sm max-w-[150px] sm:max-w-xs">
+            <div 
+              onClick={onOpenWalletSwitcher}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 shadow-sm max-w-[150px] sm:max-w-xs cursor-pointer hover:border-slate-700 transition-colors"
+              title={isArabic ? 'تبديل الحساب / المحفظة' : 'Switch Wallet'}
+            >
               <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
               <span className="font-bold text-xs text-slate-100 truncate">
                 {currentUser.displayName}

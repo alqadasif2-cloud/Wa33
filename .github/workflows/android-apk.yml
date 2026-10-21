@@ -34,9 +34,16 @@ jobs:
 
       - name: Install Web Dependencies & Compile Assets
         run: |
+          echo "Verifying environment and configuration..."
+          if [ ! -f "firebase-applet-config.json" ]; then
+            echo "Creating fallback firebase configuration for build..."
+            echo '{"projectId":"placeholder","appId":"1:0:web:0","apiKey":"dummy","authDomain":"placeholder.firebaseapp.com","firestoreDatabaseId":"(default)"}' > firebase-applet-config.json
+          fi
+
           echo "Compiling React SPA into standalone offline assets..."
           npm install --legacy-peer-deps
           npm run build
+
           mkdir -p app/src/main/assets
           rm -rf app/src/main/assets/dist
           cp -r dist app/src/main/assets/
@@ -48,7 +55,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: 'gradle'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -60,9 +66,16 @@ jobs:
 
       - name: Accept Android SDK Licenses
         run: |
-          echo "Configuring pre-installed Android SDK at $ANDROID_HOME..."
+          echo "Configuring Android SDK licenses..."
+          export ANDROID_HOME=${ANDROID_HOME:-/usr/local/lib/android/sdk}
           mkdir -p "$ANDROID_HOME/licenses" || true
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
+          printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee\nd56f5187479451eabf01fb78af6dfcb131a6481e\n84831b9409646a256e3e553d9730858474adc4ee\n" > "$ANDROID_HOME/licenses/android-sdk-license" || true
+          printf "\n84831b9409646a256e3e553d9730858474adc4ee\n" > "$ANDROID_HOME/licenses/android-sdk-preview-license" || true
+          if [ -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+            yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses || true
+          elif [ -x "$ANDROID_HOME/tools/bin/sdkmanager" ]; then
+            yes | "$ANDROID_HOME/tools/bin/sdkmanager" --licenses || true
+          fi
 
       - name: Build Standalone Debug APK
         run: |

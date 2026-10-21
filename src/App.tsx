@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { User, Wallet, Transaction, AppNotification } from './types/wallet';
 import { WalletDatabase } from './services/walletDb';
 import { marketPriceService } from './services/marketPriceService';
@@ -25,7 +25,7 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { AuthModal } from './components/AuthModal';
 import { ChatModal } from './components/ChatModal';
 import { BottomNav, MainTabType } from './components/BottomNav';
-import { Sparkles, Clock, Lock } from 'lucide-react';
+import { Clock, Lock } from 'lucide-react';
 import { formatCountdown } from './utils/formatters';
 
 export default function App() {
@@ -244,7 +244,7 @@ export default function App() {
               isArabic={isArabic}
               isFeedLive={isFeedLive}
               lastUpdatedText={lastUpdatedText}
-              onSelectAsset={(asset) => {
+              onSelectAsset={() => {
                 setShowSendModal(true);
               }}
             />
@@ -327,8 +327,13 @@ export default function App() {
           currentUser={currentUser}
           wallet={wallet}
           isArabic={isArabic}
-          onClose={() => setShowSendModal(false)}
+          initialRecipient={scannedRecipient}
+          onClose={() => {
+            setScannedRecipient('');
+            setShowSendModal(false);
+          }}
           onSuccess={() => {
+            setScannedRecipient('');
             setShowSendModal(false);
             refreshAppData();
           }}

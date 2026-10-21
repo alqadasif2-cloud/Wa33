@@ -9,11 +9,8 @@ import {
   X, 
   Search, 
   ArrowLeft, 
-  User as UserIcon, 
-  Check, 
   CheckCheck, 
-  Sparkles, 
-  Clock 
+  Sparkles 
 } from 'lucide-react';
 
 interface ChatModalProps {

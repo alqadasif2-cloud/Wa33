@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CryptoAsset } from '../types/wallet';
 import { formatCurrency, formatCryptoAmount } from '../utils/formatters';
-import { TrendingUp, TrendingDown, SlidersHorizontal, Plus, Sparkles, Radio, Info, ChevronDown, ChevronUp } from 'lucide-react';
+import { TrendingUp, TrendingDown, SlidersHorizontal, Plus, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface AssetListProps {
   assets: CryptoAsset[];

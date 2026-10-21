@@ -1,7 +1,7 @@
 import React from 'react';
 import { Wallet } from '../types/wallet';
 import { formatCurrency, formatCountdown } from '../utils/formatters';
-import { ArrowUpRight, ArrowDownLeft, Clock, Lock, Sparkles, ArrowDownUp, CreditCard, TrendingUp, TrendingDown, Radio } from 'lucide-react';
+import { ArrowUpRight, ArrowDownLeft, Clock, Lock, ArrowDownUp, CreditCard, TrendingUp, TrendingDown } from 'lucide-react';
 
 interface BalanceCardProps {
   wallet: Wallet | null;

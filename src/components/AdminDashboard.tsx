@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Wallet, Transaction, AdminAuditLog } from '../types/wallet';
+import { User, Transaction } from '../types/wallet';
 import { WalletDatabase } from '../services/walletDb';
 import { formatCurrency, shortenAddress, formatDateTime } from '../utils/formatters';
 import { 

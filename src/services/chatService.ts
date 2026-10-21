@@ -1,17 +1,14 @@
 import { ChatMessage, Conversation, User } from '../types/wallet';
-import { db, auth, handleFirestoreError, OperationType } from './firebase';
+import { db, handleFirestoreError, OperationType } from './firebase';
 import { 
   collection, 
   doc, 
   setDoc, 
-  addDoc, 
   getDoc, 
-  getDocs, 
   query, 
   where, 
   orderBy, 
   onSnapshot, 
-  serverTimestamp,
   limit
 } from 'firebase/firestore';
 

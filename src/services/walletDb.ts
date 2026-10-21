@@ -5,11 +5,8 @@ import {
   collection, 
   doc, 
   setDoc, 
-  getDoc, 
   getDocs, 
-  onSnapshot, 
-  query, 
-  where 
+  onSnapshot 
 } from 'firebase/firestore';
 import { signInAnonymously } from 'firebase/auth';
 

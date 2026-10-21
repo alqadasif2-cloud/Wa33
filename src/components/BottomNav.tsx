@@ -75,11 +75,14 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         {/* Tab 5: Settings */}
         <button
           onClick={() => onChangeTab('settings')}
-          className={`flex flex-col items-center justify-center py-1 transition-all ${
+          className={`relative flex flex-col items-center justify-center py-1 transition-all ${
             activeTab === 'settings' ? 'text-blue-400 font-bold scale-105' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <Settings className="w-5 h-5 mb-0.5" />
+          {unreadCount > 0 && (
+            <span className="absolute top-0.5 right-3 w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          )}
           <span className="text-[10px] tracking-tight">{isArabic ? 'الإعدادات' : 'Settings'}</span>
         </button>
 
